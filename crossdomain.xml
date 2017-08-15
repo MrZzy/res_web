@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cross-domain-policy>
+<allow-access-from domain="*.yii.com" />
+<allow-access-from domain="*.ctznw.com" />
+</cross-domain-policy>
