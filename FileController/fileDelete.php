@@ -15,16 +15,15 @@ clearstatcache();
 
 $time_now = time();
 
-$att_id = $_REQUEST['a_id']; //主要用于删除多个(英文半角逗号隔开1,2,3,4)
-$att_url = $_REQUEST['a_url'];
+$file_url = $_REQUEST['f_url'];
 
 /** 没有文件需要删除 */
-if ((!isset($att_id) || '' == $att_id) && (!isset($att_url) || '' == $att_url)) {
+if (!isset($file_url) || '' == $file_url) {
     exit(json_encode($err_arr['NO_FILE_TO_DELETE']));
 }
 
-if (isset($att_url) && '' != $att_url) { //根据URL删除单文件
-    $tmp_url = preg_replace('/^http:\/\/[^\/]*\//', '/', $att_url);
+if (isset($file_url) && '' != $file_url) { //根据URL删除单文件
+    $tmp_url = preg_replace('/^http:\/\/[^\/]*\//', '/', $file_url);
     $tmp_url = strip_tags(urldecode($tmp_url));
 
     if (file_exists('..' . $tmp_url)) {
