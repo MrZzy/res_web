@@ -31,7 +31,8 @@ switch ($action) {
     case 'uploadvideo': //上传多媒体
     case 'uploadfile': //上传文件
         $is_single_up = isset($_POST['is_single']) && 1 == $_POST['is_single'] ? 1 : 0; //是否单图直接上传(用于处理跨域问题)
-        uploadFile($action, $_FILES, $cfg_arr, $err_arr, $is_single_up, $call_back);
+        $from_domain = isset($_POST['from_domain']) && '' != $_POST['from_domain'] ? $_POST['from_domain'] : $cfg_arr['WWW_DOMAIN']; //来源域名，区分前后台(用于处理跨域问题) @TODO 与配置项同步
+        uploadFile($action, $_FILES, $cfg_arr, $err_arr, $from_domain, $is_single_up, $call_back);
         break;
     case 'uploadscrawl': //上传涂鸦
         $base64_data = isset($_POST['upfile']) ? $_POST['upfile'] : '';
@@ -65,10 +66,11 @@ switch ($action) {
  * @param array $up_file 上传文件
  * @param array $cfg_arr 配置项
  * @param array $err_arr 错误提示
+ * @param string $from_domain 来源域名 - 用于区分前后台(单图片上传跨域)
  * @param int $is_single_up 是否单图直接上传。1是0否
  * @param string $call_back 针对jsonp的回调函数
  */
-function uploadFile($action, $up_file, $cfg_arr, $err_arr, $is_single_up = 0, $call_back = '')
+function uploadFile($action, $up_file, $cfg_arr, $err_arr, $from_domain, $is_single_up = 0, $call_back = '')
 {
     if (empty($up_file) || !(0 < count($up_file))) { //没有选择上传文件
         $json_ret = json_encode(['state' => $err_arr['NO_FILE_UPLOAD']['msg']]);
@@ -223,7 +225,7 @@ function uploadFile($action, $up_file, $cfg_arr, $err_arr, $is_single_up = 0, $c
             'size' => $up_file['upfile']['size'],
         ];
         if (1 == $is_single_up) {
-            header('Location:http://adm.yii.com/s_up?res=' . json_encode($ret_arr));
+            header('Location:http://' . $from_domain . '/s_up?res=' . json_encode($ret_arr));
         } else {
             if ('' != $call_back) {
                 exit($call_back . '(' . json_encode($ret_arr) . ')');

@@ -5,7 +5,9 @@
  */
 
 return [
-    'UP_FILE_DOMAIN' => 'http://res.yii.com', //资源服务器域名
+    'WWW_DOMAIN' => 'http://www.yii.com', //网站前台域名
+    'ADM_DOMAIN' => 'http://adm.yii.com', //网站后台域名
+    'UP_FILE_DOMAIN' => 'http://res.yii.com', //资源服务器域名 @TODO 与网站配置同步
     'UP_IMG_SIZE_LIMIT' => 1024 * 1024 * 10, //上传图片文件大小限制(单张10M)
     'UP_VIDEO_SIZE_LIMIT' => 1024 * 1024 * 200, //上传视/音频文件大小限制(单文件200M)
     'UP_FILE_SIZE_LIMIT' => 1024 * 1024 * 100, //上传文档及其他类型文件大小限制(单文件100M)
