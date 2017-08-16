@@ -56,5 +56,6 @@ return [
         'NOT_HTTP_LINK'             => ['state' => 1013, 'code' => 'NOT_HTTP_LINK', 'msg' => '非http链接'],
         'IS_DEAD_LINK'              => ['state' => 1014, 'code' => 'IS_DEAD_LINK', 'msg' => '链接不可用'],
         'LINK_CONTENT_TYPE_ERROR'   => ['state' => 1015, 'code' => 'LINK_CONTENT_TYPE_ERROR', 'msg' => '链接ContentType异常'],
+        'FILE_NOT_EXIST'            => ['state' => 1016, 'code' => 'FILE_NOT_EXIST', 'msg' => '文件不存在'],
     ],
 ];

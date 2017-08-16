@@ -28,6 +28,8 @@ if (isset($file_url) && '' != $file_url) { //根据URL删除单文件
 
     if (file_exists('..' . $tmp_url)) {
         unlink('..' . $tmp_url);
+    } else {
+        exit(json_encode($err_arr['FILE_NOT_EXIST']));
     }
 }
 
